@@ -1,47 +1,40 @@
 # 2025-AdvancedRAG
 
-## Hands-on 2: การสร้าง Vector Indexes และเชื่อมต่อกับ OpenSearch
+## Hands-on 1: การเปรียบเทียบ Node Parsers และการสร้าง Indexes
 
 ## รายละเอียด
-ต่อเนื่องจาก Hands-on 1 ที่เน้นการเปรียบเทียบ Node Parsers และการแบ่ง nodes จากเอกสาร Hands-on 2 นี้จะขยายความรู้ไปสู่การนำ nodes ไปใช้งานจริง โดยเน้นเรื่องการสร้าง Vector Indexes สำหรับระบบ RAG โดยใช้ LlamaIndex และการเชื่อมต่อกับ OpenSearch ซึ่งเป็น Vector Database ที่มีความสามารถในการทำ Hybrid Search เพื่อเพิ่มประสิทธิภาพในการค้นหาข้อมูล
+Hands-on นี้เน้นเรื่องการเปรียบเทียบระหว่าง Node Parsers ประเภทต่างๆ (MarkdownNodeParser และ SentenceSplitter) ในการแบ่ง nodes จากเอกสาร Markdown และการสร้าง Vector Indexes สำหรับระบบ RAG โดยใช้ LlamaIndex
 
 ## จุดประสงค์การเรียนรู้
-* เข้าใจวิธีการสร้าง Vector Indexes ด้วย LlamaIndex
-* เรียนรู้การเชื่อมต่อ LlamaIndex กับ OpenSearch
-* เข้าใจการตั้งค่า Hybrid Search Pipeline ใน OpenSearch
-* ฝึกการใช้งาน HuggingFace Embedding Model (BAAI/bge-m3)
+* เข้าใจความแตกต่างและข้อดีข้อเสียระหว่าง MarkdownNodeParser และ SentenceSplitter ในการแบ่งเอกสาร
+* วิเคราะห์ผลลัพธ์จากการใช้ parser ทั้ง 2 แบบ
+* เรียนรู้วิธีการสร้าง Vector Indexes จาก nodes ที่แบ่งด้วยวิธีต่างๆ
 
 ## ขั้นตอนการทำงาน
 1. ติดตั้ง LlamaIndex และ dependencies ที่จำเป็น
 2. ดาวน์โหลด corpus เอกสาร Markdown
-3. สร้าง Hybrid Search Pipeline สำหรับ OpenSearch
-4. โหลดเอกสารโดยใช้ SimpleDirectoryReader
-5. สร้าง nodes จากเอกสารโดยใช้ MarkdownNodeParser
-6. ตั้งค่า Embedding Model (BAAI/bge-m3)
-7. เชื่อมต่อกับ OpenSearch และสร้าง Vector Store
-8. สร้าง Vector Indexes โดยบันทึกข้อมูลเข้าสู่ OpenSearch และบันทึกโครงสร้าง index ลงไฟล์ .pkl (เป็นเพียงตัวเลือกเสริม)
+3. โหลดเอกสารโดยใช้ SimpleDirectoryReader
+4. เปรียบเทียบผลลัพธ์ระหว่าง MarkdownNodeParser และ SentenceSplitter
+   - จำนวน nodes ที่แตกต่างกัน
+   - โครงสร้าง metadata ที่เก็บไว้
+   - วิธีการแบ่งเนื้อหาที่มีหัวข้อชัดเจน
+5. สร้าง Vector Indexes จาก nodes ที่แบ่งด้วยแต่ละวิธี
 
 ## คำอธิบายโค้ด
-- **การติดตั้งและการดาวน์โหลด corpus**: ติดตั้ง libraries และดาวน์โหลดเอกสาร Markdown
-- **การสร้าง Hybrid Search Pipeline**: ตั้งค่า pipeline สำหรับการทำ hybrid search ใน OpenSearch
-- **การตั้งค่า Vector Store**: ตั้งค่า OpensearchVectorClient และสร้าง OpensearchVectorStore
-- **การสร้าง Indices**: สร้าง VectorStoreIndex ซึ่งจะบันทึก vector embeddings ของเอกสารลงใน OpenSearch และบันทึกโครงสร้าง index ลงในไฟล์ .pkl (เป็นเพียงตัวเลือกเสริม)
+- **การตั้งค่าและการดาวน์โหลด corpus**: ติดตั้ง libraries และดาวน์โหลดเอกสาร Markdown
+- **ส่วนที่ 1**: การเปรียบเทียบระหว่าง MarkdownNodeParser และ SentenceSplitter แสดงความแตกต่างในการแบ่ง nodes
+- **ส่วนที่ 2**: แสดงขั้นตอนการ Ingest จนถึงการสร้าง Indexes โดยใช้ HuggingFace Embedding
 
-## ความสำคัญของ Hybrid Search
-- **ผสมผสานการค้นหา**: รวม semantic search (vector) กับ keyword search (text)
-- **เพิ่มประสิทธิภาพการค้นหา**: ช่วยให้ค้นพบข้อมูลที่เกี่ยวข้องได้ดียิ่งขึ้น
-- **ปรับแต่งน้ำหนัก**: สามารถปรับค่า weights ระหว่าง semantic และ keyword search ได้
-
-## ข้อควรระวัง
-- **ชื่อ Index**: ต้องเปลี่ยน `OPENSEARCH_INDEX` ให้เป็นชื่อของตัวเอง ในรูปแบบ `yourname_doc_index` (ตัวพิมพ์เล็กทั้งหมด)
-- **การเชื่อมต่อ OpenSearch**: ต้องมีการเชื่อมต่ออินเทอร์เน็ตที่สามารถเข้าถึง OpenSearch endpoint ได้
+## ความแตกต่างสำคัญระหว่าง Parsers
+- **MarkdownNodeParser**: แบ่งตามโครงสร้าง Markdown (หัวข้อ) เก็บข้อมูล header_path ไว้
+- **SentenceSplitter**: แบ่งตามขนาดที่กำหนด (chunk_size) รักษาขอบเขตประโยค ไม่สนใจโครงสร้าง Markdown
 
 ## การใช้งาน
 
 ### ทางเลือกในการรันโค้ด
 
 1. **Google Colab (แนะนำ)**
-   * เข้าถึงโค้ดได้ที่: [https://colab.research.google.com/github/aekanun2020/2025-AdvancedRAG/blob/main/SENT_Hands_on_2_putSparseVector_into_Opensearch.ipynb](https://colab.research.google.com/github/aekanun2020/2025-AdvancedRAG/blob/main/SENT_Hands_on_2_putSparseVector_into_Opensearch.ipynb)
+   * เข้าถึงโค้ดได้ที่: [https://colab.research.google.com/github/aekanun2020/2025-AdvancedRAG/blob/main/Hands-on-1/SENT_v3_Hands_on_1_Splitter_and_Parser.ipynb](https://colab.research.google.com/github/aekanun2020/2025-AdvancedRAG/blob/main/Hands-on-1/SENT_v3_Hands_on_1_Splitter_and_Parser.ipynb)
    * สามารถรันได้ทันทีโดยไม่ต้องติดตั้งอะไรเพิ่มเติม
    * แนะนำให้รันโค้ดแบบต่อเนื่องทีละเซลล์เพื่อดูผลลัพธ์ทุกขั้นตอน
 
@@ -55,7 +48,7 @@
        ```
      - ติดตั้ง dependencies:
        ```bash
-       pip install llama-index llama-index-embeddings-huggingface llama-index-vector-stores-opensearch requests nest_asyncio jupyter
+       pip install llama-index llama-index-embeddings-huggingface jupyter
        ```
      - ตรวจสอบว่าใช้ Python 3.8.18 จริง:
        ```bash
@@ -73,25 +66,4 @@
        conda install -c conda-forge package-name
        ```
 
-เมื่อรันโค้ดแล้ว ระบบจะบันทึก vector embeddings ของเอกสารและ metadata ลงใน OpenSearch database ซึ่งเป็น vector database หลักสำหรับระบบ RAG ของเรา
-
-นอกจากนี้ โค้ดยังบันทึกโครงสร้าง index ลงในไฟล์ .pkl ในเครื่องของคุณ แต่ไฟล์นี้เป็นเพียงส่วนเสริมเท่านั้น มีประโยชน์ในกรณีต่อไปนี้:
-- เมื่อต้องการทดสอบระบบแบบ offline โดยไม่ต้องเชื่อมต่อ OpenSearch
-- เพื่อเป็นการสำรองข้อมูลโครงสร้าง index หากต้องการย้ายไปยังระบบอื่น
-- เพื่อความเร็วในการโหลด index โดยไม่ต้องสร้าง connection ใหม่กับ OpenSearch
-
-ในการใช้งานจริง หากเรามีการเชื่อมต่อกับ OpenSearch อยู่เสมอ เราสามารถใช้ข้อมูลจาก OpenSearch โดยตรงได้เลย โดยไม่จำเป็นต้องใช้ไฟล์ .pkl แต่อย่างใด
-
-## การตรวจสอบผลลัพธ์
-
-หลังจากที่คุณได้สร้าง index และบันทึกข้อมูลลงใน OpenSearch แล้ว คุณสามารถตรวจสอบผลลัพธ์ด้วยคำสั่ง curl ต่อไปนี้:
-
-```bash
-curl -X GET "http://34.41.37.53:9200/yourname_doc_index/_search?pretty" -H 'Content-Type: application/json' -d' {
-  "query": {
-    "match_all": {}
-  }
-} ' | more
-```
-
-อย่าลืมแทนที่ `yourname_doc_index` ด้วยชื่อ index ที่คุณใช้
+เมื่อรันโค้ดในแต่ละส่วน ให้สังเกตผลลัพธ์ที่แสดงความแตกต่างระหว่าง parser ทั้งสองประเภท และวิเคราะห์ว่ากรณีใดเหมาะกับการใช้งานแบบใด
