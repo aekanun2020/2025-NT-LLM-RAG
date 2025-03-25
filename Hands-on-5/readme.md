@@ -1,9 +1,9 @@
-# 2025-AdvancedRAG
+# 2025-NT-Understanding LLM and Implementing RAG
 
-## Hands-on 4: การตอบคำถามด้วย LLM ภายใต้บริบทของข้อมูลที่ค้นหาได้ (RAG)
+## Hands-on 5: การตอบคำถามด้วย LLM ภายใต้บริบทของข้อมูลที่ค้นหาได้ (RAG)
 
 ## รายละเอียด
-ต่อเนื่องจาก Hands-on 3 ที่ได้เรียนรู้การค้นหาข้อมูลโดยใช้ Retriever กับ OpenSearch แล้ว Hands-on 4 นี้จะเน้นการพัฒนาต่อยอดเป็นระบบ RAG (Retrieval-Augmented Generation) เต็มรูปแบบ โดยนำข้อมูลที่ค้นหาได้ (Retrieval) มาสร้างเป็น prompt เพื่อส่งให้ LLM (Qwen2.5) ตอบคำถาม (Generation) อย่างถูกต้องภายใต้บริบทของข้อมูลที่ค้นพบ
+ต่อเนื่องจาก Hands-on 3 ที่ได้เรียนรู้การค้นหาข้อมูลโดยใช้ Retriever กับ OpenSearch แล้ว Hands-on 5 นี้จะเน้นการพัฒนาต่อยอดเป็นระบบ RAG (Retrieval-Augmented Generation) เต็มรูปแบบ โดยนำข้อมูลที่ค้นหาได้ (Retrieval) มาสร้างเป็น prompt เพื่อส่งให้ LLM (Qwen2.5) ตอบคำถาม (Generation) อย่างถูกต้องภายใต้บริบทของข้อมูลที่ค้นพบ
 
 ## จุดประสงค์การเรียนรู้
 * เข้าใจหลักการทำงานของ RAG (Retrieval-Augmented Generation) แบบเต็มรูปแบบ
@@ -60,7 +60,7 @@ LLM (Qwen2.5) จะตอบคำถามโดยอ้างอิงจา
 ### ทางเลือกในการรันโค้ด
 
 1. **Google Colab (แนะนำ)**
-   * เข้าถึงโค้ดได้ที่: [https://github.com/aekanun2020/2025-AdvancedRAG/blob/main/SENT_v4_Hands_on_4_Answering_within_Context.ipynb](https://github.com/aekanun2020/2025-AdvancedRAG/blob/main/SENT_v4_Hands_on_4_Answering_within_Context.ipynb)
+   * เข้าถึงโค้ดได้ที่: [https://colab.research.google.com/drive/1FMaFpjl1PL4VMN4amyqu3B461NQX5XBm?usp=sharing](https://colab.research.google.com/drive/1FMaFpjl1PL4VMN4amyqu3B461NQX5XBm?usp=sharing)
    * สามารถรันได้ทันทีโดยไม่ต้องติดตั้งอะไรเพิ่มเติม
    * แนะนำให้รันโค้ดแบบต่อเนื่องทีละเซลล์เพื่อดูผลลัพธ์ทุกขั้นตอน
 
