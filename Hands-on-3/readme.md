@@ -3,13 +3,13 @@
 ## Hands-on 3: การสร้าง Vector Indexes และเชื่อมต่อกับ OpenSearch
 
 ## รายละเอียด
-ต่อเนื่องจาก Hands-on 2 ที่เน้นการเปรียบเทียบ Node Parsers และการแบ่ง nodes จากเอกสาร Hands-on 3 นี้จะขยายความรู้ไปสู่การนำ nodes ไปใช้งานจริง โดยเน้นเรื่องการสร้าง Vector Indexes สำหรับระบบ RAG โดยใช้ LlamaIndex และการเชื่อมต่อกับ OpenSearch ซึ่งเป็น Vector Database ที่มีความสามารถในการทำ Hybrid Search เพื่อเพิ่มประสิทธิภาพในการค้นหาข้อมูล
+ต่อเนื่องจาก Hands-on 2 ที่เปรียบเทียบระหว่าง SentenceSpliter และ MarkDownParsers ซึ่งเป็นการแบ่งเอกสารเป็น chunks ย่อยๆ Hands-on 3 นี้จะขยายความรู้ไปสู่การนำ chunks/nodes ไปทำ embedding และสร้างเป็น vector แล้วนำไปบันทึกลง OpenSearch ซึ่งเป็น Vector Database
 
 ## จุดประสงค์การเรียนรู้
-* เข้าใจวิธีการสร้าง Vector Indexes ด้วย LlamaIndex
-* เรียนรู้การเชื่อมต่อ LlamaIndex กับ OpenSearch
 * เข้าใจการตั้งค่า Hybrid Search Pipeline ใน OpenSearch
-* ฝึกการใช้งาน HuggingFace Embedding Model (BAAI/bge-m3)
+* เรียนรู้การเชื่อมต่อ LlamaIndex กับ OpenSearch
+* เข้าใจวิธีการสร้าง vector ด้วยการใช้ Embedding Model (BAAI/bge-m3)
+* เข้าใจการบันทึก vector ลงสู่ Vector Database (OpenSearch)
 
 ## ขั้นตอนการทำงาน
 1. ติดตั้ง LlamaIndex และ dependencies ที่จำเป็น
