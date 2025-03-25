@@ -1,9 +1,9 @@
-# 2025-AdvancedRAG
+# 2025-NT-Understanding LLM and Implementing RAG
 
-## Hands-on 3: การค้นหาข้อมูลโดยใช้ Retriever กับ OpenSearch
+## Hands-on 4: การค้นหาข้อมูลโดยใช้ Retriever กับ OpenSearch
 
 ## รายละเอียด
-ต่อเนื่องจาก Hands-on 2 ที่ได้สร้าง Vector Indexes และบันทึกลงใน OpenSearch Vector Database แล้ว Hands-on 3 นี้จะเน้นการนำ Vector Indexes ที่บันทึกไว้ใน OpenSearch มาใช้ในการค้นหาข้อมูลแบบ Hybrid Search (ผสมผสานระหว่าง Vector Search และ Keyword Search) โดยใช้ search pipeline ของ OpenSearch ร่วมกับ Retriever จาก LlamaIndex เพื่อค้นหาข้อมูลสุขภาพเกี่ยวกับโรคหัดและโรคหัดเยอรมัน
+ต่อเนื่องจาก Hands-on 3 ที่ได้สร้าง Vector Indexes และบันทึกลงใน OpenSearch Vector Database แล้ว Hands-on 4 นี้จะเน้นการนำ Vector Indexes ที่บันทึกไว้ใน OpenSearch มาใช้ในการค้นหาข้อมูลแบบ Hybrid Search (ผสมผสานระหว่าง Vector Search และ Keyword Search) โดยใช้ search pipeline ของ OpenSearch ร่วมกับ Retriever จาก LlamaIndex เพื่อค้นหาข้อมูลสุขภาพเกี่ยวกับโรคหัดและโรคหัดเยอรมัน
 
 ## จุดประสงค์การเรียนรู้
 * เข้าใจวิธีการใช้ Retriever เพื่อค้นหาข้อมูลจาก Vector Indexes
@@ -23,7 +23,7 @@
 
 ## คำอธิบายโค้ด
 - **การติดตั้ง**: ติดตั้งไลบรารีที่จำเป็น เช่น llama-index, llama-index-embeddings-huggingface, llama-index-vector-stores-opensearch
-- **การเชื่อมต่อ OpenSearch**: กำหนดค่า endpoint, index name และฟิลด์ที่ใช้ในการค้นหา โดยเชื่อมต่อกับ Vector Index ที่บันทึกไว้แล้วใน Hands-on 2
+- **การเชื่อมต่อ OpenSearch**: กำหนดค่า endpoint, index name และฟิลด์ที่ใช้ในการค้นหา โดยเชื่อมต่อกับ Vector Index ที่บันทึกไว้แล้วใน Hands-on 3
 - **การตั้งค่า Embedding Model**: ใช้ HuggingFaceEmbedding กับโมเดล BAAI/bge-m3 เพื่อ embedding คำถามใหม่ให้อยู่ในรูปแบบเดียวกับที่บันทึกไว้
 - **การสร้าง Vector Store**: ใช้ OpensearchVectorClient และ OpensearchVectorStore เพื่อเชื่อมต่อกับ OpenSearch โดยระบุ search_pipeline เป็น "hybrid-search-pipeline" เพื่อใช้ Hybrid Search
 - **การสร้าง Vector Index**: สร้าง VectorStoreIndex จาก Vector Store ที่มีอยู่แล้วใน OpenSearch โดยไม่ต้องอัปโหลดข้อมูลใหม่
@@ -43,20 +43,20 @@
 - **ผสมผสานการค้นหา**: รวม semantic search (vector) กับ keyword search (text) โดยใช้ search pipeline ของ OpenSearch
 - **เพิ่มประสิทธิภาพการค้นหา**: ช่วยให้ค้นพบข้อมูลที่เกี่ยวข้องได้ดียิ่งขึ้น
 - **แสดงคะแนนความเกี่ยวข้อง**: ผลลัพธ์แสดงคะแนนที่คำนวณจากทั้ง semantic และ keyword matching
-- **ใช้ประโยชน์จากข้อมูลที่บันทึกไว้**: เข้าถึงข้อมูล Vector Embeddings ที่บันทึกไว้ใน OpenSearch จาก Hands-on 2 โดยไม่ต้องสร้างใหม่
+- **ใช้ประโยชน์จากข้อมูลที่บันทึกไว้**: เข้าถึงข้อมูล Vector Embeddings ที่บันทึกไว้ใน OpenSearch จาก Hands-on 3 โดยไม่ต้องสร้างใหม่
 
 ## ข้อควรระวัง
-- **ชื่อ Index**: ต้องใช้ชื่อ index ที่ถูกต้องตามที่สร้างไว้ใน Hands-on 2 (ในตัวอย่างคือ "aekanun_doc_index" แต่ผู้ใช้ควรเปลี่ยนเป็นชื่อของตัวเอง)
+- **ชื่อ Index**: ต้องใช้ชื่อ index ที่ถูกต้องตามที่สร้างไว้ใน Hands-on 3 (ในตัวอย่างคือ "aekanun_doc_index" แต่ผู้ใช้ควรเปลี่ยนเป็นชื่อของตัวเอง)
 - **การเชื่อมต่อ OpenSearch**: ต้องมีการเชื่อมต่ออินเทอร์เน็ตที่สามารถเข้าถึง OpenSearch endpoint ได้
-- **การตั้งค่า search_pipeline**: ต้องแน่ใจว่ามีการตั้งค่า "hybrid-search-pipeline" ไว้แล้วใน OpenSearch (ซึ่งควรได้ดำเนินการไว้แล้วใน Hands-on 2)
-- **Embedding Model**: โมเดล Embedding ที่ใช้ต้องเป็นตัวเดียวกับที่ใช้ใน Hands-on 2 (BAAI/bge-m3) เพื่อให้เวกเตอร์ของคำถามอยู่ในมิติและรูปแบบเดียวกันกับที่บันทึกไว้
+- **การตั้งค่า search_pipeline**: ต้องแน่ใจว่ามีการตั้งค่า "hybrid-search-pipeline" ไว้แล้วใน OpenSearch (ซึ่งควรได้ดำเนินการไว้แล้วใน Hands-on 3)
+- **Embedding Model**: โมเดล Embedding ที่ใช้ต้องเป็นตัวเดียวกับที่ใช้ใน Hands-on 3 (BAAI/bge-m3) เพื่อให้เวกเตอร์ของคำถามอยู่ในมิติและรูปแบบเดียวกันกับที่บันทึกไว้
 
 ## การใช้งาน
 
 ### ทางเลือกในการรันโค้ด
 
 1. **Google Colab (แนะนำ)**
-   * เข้าถึงโค้ดได้ที่: [https://github.com/aekanun2020/2025-AdvancedRAG/blob/main/Hands-on-3/SENT_Hands_on_3_Search_by_Retriever.ipynb](https://github.com/aekanun2020/2025-AdvancedRAG/blob/main/Hands-on-3/SENT_Hands_on_3_Search_by_Retriever.ipynb)
+   * เข้าถึงโค้ดได้ที่: [https://colab.research.google.com/drive/1CyfI0C8omCvbmiAD_qy2EWk7Ecm7mIPI?usp=sharing](https://colab.research.google.com/drive/1CyfI0C8omCvbmiAD_qy2EWk7Ecm7mIPI?usp=sharing)
    * สามารถรันได้ทันทีโดยไม่ต้องติดตั้งอะไรเพิ่มเติม
    * แนะนำให้รันโค้ดแบบต่อเนื่องทีละเซลล์เพื่อดูผลลัพธ์ทุกขั้นตอน
 
@@ -88,7 +88,7 @@
        conda install -c conda-forge package-name
        ```
 
-เมื่อรันโค้ดแล้ว ระบบจะเชื่อมต่อกับ OpenSearch เพื่อใช้ Vector Index ที่สร้างไว้แล้วใน Hands-on 2 (ที่บันทึกไว้ใน OpenSearch) ในการค้นหาข้อมูล โดยจะใช้ Hybrid Search Pipeline ของ OpenSearch ซึ่งผสมผสานการค้นหาแบบ Vector Search (Semantic) และ Keyword Search (Lexical) เข้าด้วยกัน ระบบจะแสดงผลลัพธ์ของคำถามที่กำหนดไว้ล่วงหน้า และอนุญาตให้ผู้ใช้ป้อนคำถามเพิ่มเติมได้
+เมื่อรันโค้ดแล้ว ระบบจะเชื่อมต่อกับ OpenSearch เพื่อใช้ Vector Index ที่สร้างไว้แล้วใน Hands-on 3 (ที่บันทึกไว้ใน OpenSearch) ในการค้นหาข้อมูล โดยจะใช้ Hybrid Search Pipeline ของ OpenSearch ซึ่งผสมผสานการค้นหาแบบ Vector Search (Semantic) และ Keyword Search (Lexical) เข้าด้วยกัน ระบบจะแสดงผลลัพธ์ของคำถามที่กำหนดไว้ล่วงหน้า และอนุญาตให้ผู้ใช้ป้อนคำถามเพิ่มเติมได้
 
 ## ผลลัพธ์การค้นหา
 
