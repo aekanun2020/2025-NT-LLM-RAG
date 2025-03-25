@@ -1,9 +1,9 @@
-# 2025-AdvancedRAG
+# 2025-NT-Understanding LLM and Implementing RAG
 
-## Hands-on 2: การสร้าง Vector Indexes และเชื่อมต่อกับ OpenSearch
+## Hands-on 3: การสร้าง Vector Indexes และเชื่อมต่อกับ OpenSearch
 
 ## รายละเอียด
-ต่อเนื่องจาก Hands-on 1 ที่เน้นการเปรียบเทียบ Node Parsers และการแบ่ง nodes จากเอกสาร Hands-on 2 นี้จะขยายความรู้ไปสู่การนำ nodes ไปใช้งานจริง โดยเน้นเรื่องการสร้าง Vector Indexes สำหรับระบบ RAG โดยใช้ LlamaIndex และการเชื่อมต่อกับ OpenSearch ซึ่งเป็น Vector Database ที่มีความสามารถในการทำ Hybrid Search เพื่อเพิ่มประสิทธิภาพในการค้นหาข้อมูล
+ต่อเนื่องจาก Hands-on 2 ที่เน้นการเปรียบเทียบ Node Parsers และการแบ่ง nodes จากเอกสาร Hands-on 3 นี้จะขยายความรู้ไปสู่การนำ nodes ไปใช้งานจริง โดยเน้นเรื่องการสร้าง Vector Indexes สำหรับระบบ RAG โดยใช้ LlamaIndex และการเชื่อมต่อกับ OpenSearch ซึ่งเป็น Vector Database ที่มีความสามารถในการทำ Hybrid Search เพื่อเพิ่มประสิทธิภาพในการค้นหาข้อมูล
 
 ## จุดประสงค์การเรียนรู้
 * เข้าใจวิธีการสร้าง Vector Indexes ด้วย LlamaIndex
@@ -41,7 +41,7 @@
 ### ทางเลือกในการรันโค้ด
 
 1. **Google Colab (แนะนำ)**
-   * เข้าถึงโค้ดได้ที่: [https://colab.research.google.com/github/aekanun2020/2025-AdvancedRAG/blob/main/SENT_Hands_on_2_putSparseVector_into_Opensearch.ipynb](https://colab.research.google.com/github/aekanun2020/2025-AdvancedRAG/blob/main/SENT_Hands_on_2_putSparseVector_into_Opensearch.ipynb)
+   * เข้าถึงโค้ดได้ที่: [https://colab.research.google.com/drive/1z939r-Y817lUqzOoR8lglcVvztWQRpnA?usp=sharing](https://colab.research.google.com/drive/1z939r-Y817lUqzOoR8lglcVvztWQRpnA?usp=sharing)
    * สามารถรันได้ทันทีโดยไม่ต้องติดตั้งอะไรเพิ่มเติม
    * แนะนำให้รันโค้ดแบบต่อเนื่องทีละเซลล์เพื่อดูผลลัพธ์ทุกขั้นตอน
 
